@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.showbase.DirectObject import DirectObject
 from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.PyDatagramIterator import PyDatagramIterator
@@ -6,6 +6,7 @@ from direct.actor.Actor import Actor
 from direct.task.Task import Task
 from direct.gui.DirectGui import *
 import sys
+
 
 
 class Client(DirectObject):
@@ -19,7 +20,7 @@ class Client(DirectObject):
     if self.Connection:
       self.cReader.addConnection(self.Connection)  # receive messages from server
     else:
-      print 'connection failed'
+      print("Connection failed.")
 
   def tskReaderPolling(self,m,playerRegulator,chatClass):#this function checks to see if there is any data from the server
     if self.cReader.dataAvailable():
@@ -69,7 +70,7 @@ class PlayerReg(DirectObject): #This class will regulate the players
     self.iterator = PyDatagramIterator(datagram)
     self.type = self.iterator.getString()
     if (self.type == "init"):
-      print "initializing"
+      print("Initializing...")
       #initialize
       m.setPlayerNum(self.iterator.getUint8())
       self.num = self.iterator.getFloat64()
@@ -81,7 +82,7 @@ class PlayerReg(DirectObject): #This class will regulate the players
           self.playerList[i].currentPos['x'] = self.iterator.getFloat64()
           self.playerList[i].currentPos['y'] = self.iterator.getFloat64()
           self.playerList[i].currentPos['z'] = self.iterator.getFloat64()
-          print "player ", str(i), " initialized"
+          print("Player ", str(i), " initialized.")
         else:
           self.playerList.append(Player())
       self.numofplayers = self.num
@@ -159,7 +160,7 @@ class Me(DirectObject):
     #base.camera.lookAt(self.actorHead)
     if (keyClass.keyMap["left"]!=0):
       self.model.setH(self.model.getH() + self.elapsed*300)
-      print str(self.model.getY()), str(self.model.getX())
+      print(str(self.model.getY()), str(self.model.getX()))
     if (keyClass.keyMap["right"]!=0):
       self.model.setH(self.model.getH() - self.elapsed*300)
     if (keyClass.keyMap["forward"]!=0):
@@ -246,7 +247,7 @@ class World(DirectObject): #This class will control anything related to the virt
       try:
         clientClass.cWriter.send(self.datagram,clientClass.Connection)
       except:
-        print "No connection to the server. You are in stand alone mode."
+        print("No connection to the server. You are in stand alone mode.")
         return Task.done
       self.timeSinceLastUpdate = 0
     return Task.cont
@@ -374,10 +375,11 @@ class chatRegulator(DirectObject):
 
   def getWidgetTransformsF(self):
     for child in aspect2d.getChildren():
-      print child, "  position = ", child.getPos()
-      print child, "  scale = ", child.getScale()
+      print(child, "  position = ", child.getPos())
+      print(child, "  scale = ", child.getScale())
   def text(self,msg,position,index):
     self.txt[index].destroy()
     self.txt[index] = OnscreenText(text = msg, pos = position,fg=(1,1,1,1),align = TextNode.ALeft, scale = .05,mayChange = 1)
     self.txt[index].reparentTo(base.a2dBottomLeft)
     self.txt[index].setPos(.05,.15+.05*index)
+

@@ -1,5 +1,5 @@
 from direct.showbase.DirectObject import DirectObject
-from pandac.PandaModules import *
+from panda3d.core import *
 
 class Castle(DirectObject):
 	def __init__(self, pos,hpr,sc):
@@ -8,3 +8,4 @@ class Castle(DirectObject):
 		self.model.setHpr(hpr.getX(),hpr.getY(),hpr.getZ())
 		self.model.setScale(sc)
 		self.model.reparentTo(render)
+

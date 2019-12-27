@@ -1,7 +1,7 @@
 import direct.directbase.DirectStart
 from direct.showbase.DirectObject import DirectObject
 from direct.task.Task import Task
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.PyDatagramIterator import PyDatagramIterator 
 from direct.actor.Actor import Actor
@@ -9,12 +9,17 @@ from client import *
 from MapObjects import *
 import sys
 
-#Just some groundwork
 
+
+# GLOBALS
+SERVER_IP = "127.0.0.1"
+
+
+#Just some groundwork
 base.disableMouse()
 base.camera.setPos(0,0,10)
 #establish connection > send/receive updates > update world
-worldClient = Client(9099,"192.168.2.13")
+worldClient = Client(9099, SERVER_IP)
 Terrain = Terrain()
 N = PlayerReg()
 me = Me(Terrain)
@@ -47,5 +52,5 @@ render.setLight(plnp)
 me.model.setShaderInput("light", plnp)
 #=============================================================================#
 #Castle = Castle(Vec3(288.96,294.45,30.17), Vec3(119.05,270,0),0.08)
-run()
+base.run()
 
