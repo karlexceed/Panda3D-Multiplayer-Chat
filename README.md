@@ -1,5 +1,5 @@
 # Panda3D-Multiplayer-Chat
-This is a simple Client Server Networking framework initially made for the Panda 3D game engine in 2009. It's a good place to learn about how to do game networking, but needs many improvements. Project works with current (1.9) version of Panda3D, pull-requests an documentation writers are welcome.
+This is a simple Client Server Networking framework initially made for the Panda 3D game engine in 2009. It's a good place to learn about how to do game networking, but needs many improvements. Project works with current (1.10) version of Panda3D, pull-requests an documentation writers are welcome.
 
 ## Getting Started
 To get Started you will need to run both the server and client.
