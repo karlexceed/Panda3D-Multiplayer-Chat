@@ -1,15 +1,16 @@
 #dont open the render window
-from pandac.PandaModules import * 
+from panda3d.core import *
 ConfigVariableString("window-type","none").setValue("none")
 
 from direct.showbase import ShowBase
 from direct.task.Task import Task
-from pandac.PandaModules import *
 from direct.distributed.PyDatagram import PyDatagram
-
 from direct.showbase.DirectObject import DirectObject
 from Server import *
-import sys 
+import sys
+
+
+
 ShowBase.ShowBase() 
 
 #TODO: Make it so when a player disconnects he is removed from the game
@@ -26,4 +27,5 @@ taskMgr.add(worldServer.tskReaderPolling,"Poll the connection reader",extraArgs 
 taskMgr.add(Active.updatePlayers,"Update Every Player",extraArgs = [worldServer,None,"positions"])
 
 #print "successful"
-run()
+base.run()
+

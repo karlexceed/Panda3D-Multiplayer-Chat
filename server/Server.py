@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.distributed.PyDatagramIterator import PyDatagramIterator
 from direct.distributed.PyDatagram import PyDatagram
 from direct.showbase.DirectObject import DirectObject
@@ -14,7 +14,7 @@ class Server(QueuedConnectionManager):
 		self.backlog = b
 		self.socket = self.cManager.openTCPServerRendezvous(self.port,self.backlog)
 		self.cListener.addConnection(self.socket)
-		print str(self)
+		print(str(self))
 	def tskReaderPolling(self,regClass): #This function listens for any data coming on already established functions
 		if self.cReader.dataAvailable():
 			self.datagram=NetDatagram()  # catch the incoming data in this instance
@@ -37,7 +37,7 @@ class Server(QueuedConnectionManager):
 				regClass.sendInitialInfo(regClass.active, self)
 				regClass.active += 1
 				self.cReader.addConnection(self.newConnection)     # Begin reading connection
-				print 'connection received'
+				print('connection received')
 		return Task.cont
 
 	
@@ -80,7 +80,7 @@ class PlayerReg(DirectObject): #This class will hold anything that is related to
 			self.datagram.addString("chat")
 			self.text = self.iterator.getString()
 			self.datagram.addString(self.text)
-			print self.text,' ',str(serverClass)
+			print(self.text,' ',str(serverClass))
 			for k in self.PlayerList:
 				serverClass.cWriter.send(self.datagram,k.connectionID)
 				
